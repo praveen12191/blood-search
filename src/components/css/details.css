@@ -1,0 +1,17 @@
+.top{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 40px;
+}
+.top:hover{
+    transform: scale(0.9);
+}
+.details{
+    width: 20%;
+    padding: 70px;
+    min-width: 275px;
+    border: 2px solid rgb(212, 223, 223);
+    box-shadow: rgba(164, 135, 135, 0.25) 0px 54px 55px, rgba(200, 98, 98, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 10px;
+}
