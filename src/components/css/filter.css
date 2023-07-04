@@ -1,0 +1,22 @@
+.nav{
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    background-color: antiquewhite;
+    border-radius: 20px;
+}
+a{
+    padding: 20%;
+    text-decoration: none;
+}
+#form{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+form{
+    background-color: azure;
+    padding: 80px;
+    border-radius: 12px;
+}

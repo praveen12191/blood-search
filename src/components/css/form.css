@@ -8,3 +8,6 @@ input,select{
     padding: 5px;
     margin: 5px;
 }
+input{
+    border-radius: 7px;
+}
