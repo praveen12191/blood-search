@@ -1,7 +1,8 @@
 import "./css/pop.css"
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
-const Popup = ({data}) => {
+import {fetchDetails} from "./filter"
+const Popup = ({data,setdetails,setdeleted}) => {
     const navigate = useNavigate();
     const pinValidate = (event) =>{
         event.preventDefault()
@@ -13,7 +14,11 @@ const Popup = ({data}) => {
         }).then((response) =>{
             if(response.status==200)
             {
+                const place =  response.data.place
+                const group = response.data.group
+                fetchDetails(place,group,setdetails)
                 alert("Deleted")
+                setdeleted(true)
                 navigate("/data")
             }
             else

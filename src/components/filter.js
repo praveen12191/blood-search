@@ -1,15 +1,28 @@
 import axios from "axios";
-import { useState } from "react";
+
 import "./css/filter.css"
-import { BrowserRouter, Routes, Route,Link} from "react-router-dom";
+import { BrowserRouter, Routes, Route,Link, Outlet} from "react-router-dom";
 import NavBar from "./navBar";
 import { useNavigate } from "react-router-dom";
+import { createContext, useEffect, useState } from "react"
 
+export const Context = createContext()
 const url = "http://localhost:8000/placeDetails"
+export function fetchDetails(place,group,setdetails){
+    const url2 = "http://localhost:8000/postData"
 
+    axios.post(url2,{
+        place : place,
+        group : group
+    }).then((data)=>{
+        setdetails(data.data)
+    })
+} 
 const Search = ({data,setIsSearch,setdetails}) => {
     const [datas,setdata] = useState([])
     const navigate = useNavigate();
+    const [places,setplace] = useState([])
+    const [groups,setgroup] = useState([])
     const getdata = (event) =>{
         event.preventDefault()
         const place = document.getElementById("place").value
@@ -17,40 +30,60 @@ const Search = ({data,setIsSearch,setdetails}) => {
         const url2 = "http://localhost:8000/postData"
         const url3 = "http://localhost:8000/getPostdata"
         console.log(place)
-    axios.post(url2,{
-            place : place,
-            group : group
-        }).then((data)=>{
-            setdetails(data.data)
-        })
+        fetchDetails(place,group,setdetails)
         navigate("/data");
     }
+    const placeDetails = () =>
+    {
+        const url = 'http://localhost:8000/placeDetails'
+        axios.get(url).then((data)=>{
+            setplace(data.data)
+        })
+    }
+    const groupDetails = () =>
+    {
+        const url = 'http://localhost:8000/groupDetails'
+        axios.get(url).then((data)=>{
+            setgroup(data.data)
+        })
+    }
+    useEffect(()=>{
+        placeDetails()
+        groupDetails()
+
+    },[])
+    
+
+
     return (  
-        <div>
+        <Context.Provider value={{places,groups}}>
             <NavBar></NavBar>
-            <div id="form">
+
+            {window.location.pathname=="/"  && <div id="form">
                 <form onSubmit={(event) =>{
                     getdata(event)}}>
                     <lable>Place</lable>
                     
                     <select id="place">
-                        {/* {data.map((i)=>
-                        <option value={i}>{i}</option>)} */}
-                        <option value="TIRUPUR">TIRUPUR</option>
+                        {places.length>0 && 
+                        places.map((i)=>
+                        <option value={i}>{i}</option>)}
+                        {/* <option value="TIRUPUR">TIRUPUR</option>
                         <option value="CBE">CBE</option>
-                        <option value="ERODE">ERODE</option>
+                        <option value="ERODE">ERODE</option> */}
                     </select><br></br>
                     <lable>Group</lable>
                     <select id="group">
-                        <option value="A+">A +ve</option>
-                        <option value="B+">B +ve</option>
-                        <option value="A-">A -ve</option>
+                        {
+                            groups.length>0 && 
+                    groups.map((i)=>
+                        <option value={i}>{i}</option>)}
                     </select><br></br>
                     <button>Submit</button>
                 </form>
-            </div>
-        </div>
+            </div>}
+            <Outlet/>
+        </Context.Provider>
     );
 }
- 
 export default Search;

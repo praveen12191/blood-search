@@ -1,18 +1,22 @@
 import "./css/form.css"
 import axios from "axios"
-import { useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import NavBar from "./navBar"
 import { Location } from "react-router-dom"
+import { Context } from "./filter"
+
 
 
 // const api = axios.create({
 //     baseURL : 'http://localhost:8000/home/'
 // })
 
-
 const Forms = ({setSubmit}) => {
+    const {places,groups} = useContext(Context)
+    
     const [arr,setarr] = useState([])
-    const [places,setplace] = useState([])
+    // const [places,setplace] = useState([])
+    // const [group,setgroup] = useState([])
     const handle = (event)=>{
         event.preventDefault()
         const name = document.getElementById("name").value
@@ -29,10 +33,10 @@ const Forms = ({setSubmit}) => {
         const url2 = 'http://localhost:8000/getData'
         const url3 = 'http://localhost:8000/place'
         
-        axios.get(url3).then((i)=>{
-            setplace(i)
-            console.log(places)
-        })
+        // axios.get(url3).then((i)=>{
+        //     setplace(i)
+        //     console.log(places)
+        // })
         axios.post(url,{
             name : name,
             age : age,
@@ -45,10 +49,11 @@ const Forms = ({setSubmit}) => {
         alert("Sucessfully added")
         document.location.reload(true);
     }
-
+    
     return (
+
         <div>
-        <NavBar></NavBar>
+        
             <div className="formTop">
             
             <form onSubmit={(event) =>{
@@ -60,19 +65,19 @@ const Forms = ({setSubmit}) => {
                 <input id="age"></input><br></br>
                 <label>Group</label>
                 <select id="group">
-                    <option value="A+"> A +ve </option>
-                    <option value="A-">A -ve</option>
-                    <option value="O+">O +ve</option>
-                    <option value="O-">O -ve</option>
+                {groups.length>0 && 
+                    groups.map((i,index)=>
+                        <option key={index} value={i}>{i}</option>)}
                 </select> <br></br>
                 <label>Place</label>
                 <select id="place">
-                    {/* {places.map((i)=>
-                        <option value={i}>{i}</option>)} */}
-                    <option value="TIRUPUR">Trippur</option>
+                    {places.length>0 && 
+                    places.map((i,index)=>
+                        <option key={index} value={i}>{i}</option>)}
+                    {/* <option value="TIRUPUR">Trippur</option>
                     <option value="CBE">CBE</option>
                     <option value="ERODE">ERODE</option>
-                    <option value="SALEM">SALEM</option>
+                    <option value="SALEM">SALEM</option> */}
                 </select> <br></br>
                 <label>Phone</label>
                 <input id="phone"></input><br></br>

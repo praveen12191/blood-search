@@ -1,8 +1,16 @@
-h3{
+h2{
     text-align: center;
-    font-size: 18px;
-    font-family: 'georgia';
+    font-family: serif;
 }
 .p{
-    padding-left: 80px;
+    text-align: center;
+}
+a{
+    color: rgb(162, 204, 218);
+    
+}
+.bar{
+    padding: 30px;
+    border-radius: 5px;
+
 }
