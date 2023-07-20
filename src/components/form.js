@@ -7,16 +7,10 @@ import { Context } from "./filter"
 
 
 
-// const api = axios.create({
-//     baseURL : 'http://localhost:8000/home/'
-// })
-
 const Forms = ({setSubmit}) => {
     const {places,groups} = useContext(Context)
     
     const [arr,setarr] = useState([])
-    // const [places,setplace] = useState([])
-    // const [group,setgroup] = useState([])
     const handle = (event)=>{
         event.preventDefault()
         const name = document.getElementById("name").value
@@ -32,11 +26,6 @@ const Forms = ({setSubmit}) => {
         const url = 'http://localhost:8000/post'
         const url2 = 'http://localhost:8000/getData'
         const url3 = 'http://localhost:8000/place'
-        
-        // axios.get(url3).then((i)=>{
-        //     setplace(i)
-        //     console.log(places)
-        // })
         axios.post(url,{
             name : name,
             age : age,
@@ -74,10 +63,6 @@ const Forms = ({setSubmit}) => {
                     {places.length>0 && 
                     places.map((i,index)=>
                         <option key={index} value={i}>{i}</option>)}
-                    {/* <option value="TIRUPUR">Trippur</option>
-                    <option value="CBE">CBE</option>
-                    <option value="ERODE">ERODE</option>
-                    <option value="SALEM">SALEM</option> */}
                 </select> <br></br>
                 <label>Phone</label>
                 <input id="phone"></input><br></br>

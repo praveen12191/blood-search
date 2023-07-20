@@ -68,9 +68,6 @@ const Search = ({data,setIsSearch,setdetails}) => {
                         {places.length>0 && 
                         places.map((i)=>
                         <option value={i}>{i}</option>)}
-                        {/* <option value="TIRUPUR">TIRUPUR</option>
-                        <option value="CBE">CBE</option>
-                        <option value="ERODE">ERODE</option> */}
                     </select><br></br>
                     <lable>Group</lable>
                     <select id="group">
