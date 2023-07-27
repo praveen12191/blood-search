@@ -25,11 +25,10 @@ const Search = ({data,setIsSearch,setdetails}) => {
     const [groups,setgroup] = useState([])
     const getdata = (event) =>{
         event.preventDefault()
-        const place = document.getElementById("place").value
-        const group = document.getElementById("group").value
+        const [place,setplace] = useState("")
+        const [group,setgroup] = useState("")
         const url2 = "http://localhost:8000/postData"
         const url3 = "http://localhost:8000/getPostdata"
-        console.log(place)
         fetchDetails(place,group,setdetails)
         navigate("/data");
     }
@@ -67,14 +66,14 @@ const Search = ({data,setIsSearch,setdetails}) => {
                     <select id="place">
                         {places.length>0 && 
                         places.map((i)=>
-                        <option value={i}>{i}</option>)}
+                        <option onChange={(e)=>setplace(e.target.value)} value={i}>{i}</option>)}
                     </select><br></br>
                     <lable>Group</lable>
                     <select id="group">
                         {
                             groups.length>0 && 
                     groups.map((i)=>
-                        <option value={i}>{i}</option>)}
+                        <option onChange={(e)=>setgroup(e.target.value)} value={i}>{i} </option>)}
                     </select><br></br>
                     <button>Submit</button>
                 </form>
