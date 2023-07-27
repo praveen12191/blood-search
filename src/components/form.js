@@ -13,12 +13,6 @@ const Forms = ({setSubmit}) => {
     const [arr,setarr] = useState([])
     const handle = (event)=>{
         event.preventDefault()
-        // const name = document.getElementById("name").value
-        // const age = document.getElementById("age").value
-        // const group = document.getElementById("group").value
-        // const phone = document.getElementById("phone").value
-        // const place = document.getElementById("place").value
-        // const id = document.getElementById("pass").value
         const [name,setname] = useState("")
         const [age,setage] = useState("")
         const [group,setgruop] = useState("")
